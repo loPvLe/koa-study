@@ -1,27 +1,31 @@
-const Koa = require('koa');
-const app = new Koa();
+const http = require('http');
+const mongoose = require('mongoose');
+const { logger } = require('./middleware/logger');
+const app = require('./app');
+const dotenv =  require('dotenv');
+const SERVER = http.createServer(app.callback());
 
-// logger
+dotenv.config('./env');
 
-app.use(async (ctx, next) => {
-  await next();
-  const rt = ctx.response.get('X-Response-Time');
-  console.log(`${ctx.method} ${ctx.url} - ${rt}`);
+const PORT = process.env.PORT || 6673;
+
+// Gracefully close Mongo connection
+const gracefulShutdown = () => {
+  mongoose.connection.close(false, () => {
+    logger.info('Mongo closed');
+    SERVER.close(() => {
+      logger.info('Shutting down...');
+    });
+  });
+};
+
+// Server start
+SERVER.listen(PORT, '0.0.0.0', () => {
+  logger.info(`Running on port: ${PORT}`);
+
+  // Handle kill commands
+  process.on('SIGTERM', gracefulShutdown);
+
+  // Prevent dirty exit on code-fault crashes:
+  process.on('uncaughtException', gracefulShutdown);
 });
-
-// x-response-time
-
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
-});
-
-// response
-
-app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
-
-app.listen(3000, () => console.log(`Example app listening on port ${3000}!`))

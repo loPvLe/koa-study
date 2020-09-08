@@ -9,6 +9,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.13.0"
+    "dotenv": "^8.2.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-conditional-get": "^2.0.0",
+    "koa-etag": "^3.0.0",
+    "koa-helmet": "^5.2.0",
+    "koa-pino-logger": "^3.0.0",
+    "koa-router": "^9.4.0",
+    "koa2-cors": "^2.0.6",
+    "mongoose": "^5.10.3",
+    "pino": "^6.6.0"
+  },
+  "devDependencies": {
+    "pino-pretty": "^4.2.1"
   }
 }
