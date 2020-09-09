@@ -1,11 +1,11 @@
 const Router = require('koa-router');
-const index = require('./list/routes');
+const list = require('./list/routes');
 
 
 const v1 = new Router({
   prefix: '/v1',
 });
 
-v1.use(index.routes());
+v1.use(list.routes());
 
 module.exports = v1;
