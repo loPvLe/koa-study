@@ -18,10 +18,6 @@
         <div class="color-656565 margin-top-6">{{item.name}}</div>
       </van-grid-item>
     </van-grid>
-
-    <van-tabbar v-model="active" class="fixed-footer-tabs">
-      <van-tabbar-item :icon="item.icon" v-for="item in footerTabs" :key="item.id">{{item.name}}</van-tabbar-item>
-    </van-tabbar>
   </div>
 </template>
 
@@ -38,14 +34,7 @@ export default {
         {id: 6, name: "浙菜"},
         {id: 7, name: "徽菜"},
         {id: 8, name: "湘菜"}
-      ],
-      footerTabs: [
-        {id: 1, name: "首页", icon: "home-o"},
-        {id: 2, name: "分类", icon: "apps-o"},
-        {id: 3, name: "食材", icon: "search"},
-        {id: 4, name: "我的", icon: "user-o"}
-      ],
-      active: 0
+      ]
     };
   },
 };
