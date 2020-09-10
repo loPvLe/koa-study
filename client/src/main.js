@@ -1,12 +1,12 @@
 import Vue from 'vue'
-import Mint from 'mint-ui';
 import App from './App.vue'
-import 'mint-ui/lib/style.css'
-import '@/assets/css/index.css'
+import Vant from 'vant';
 import router from './router'
 
-Vue.use(Mint);
+import 'vant/lib/index.css';
+import '@/assets/css/index.css'
 
+Vue.use(Vant);
 
 Vue.config.productionTip = false
 
