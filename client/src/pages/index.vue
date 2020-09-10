@@ -1,16 +1,16 @@
 <template>
   <div>
-      <router-view></router-view>
-      <footer-tabs></footer-tabs>
+    <router-view></router-view>
+    <footer-tabs></footer-tabs>
   </div>
 </template>
 
 <script>
-import FooterTabs from "@/components/FooterTabs/index"
+import FooterTabs from "@/components/FooterTabs/index";
 export default {
-    components: {
-        FooterTabs
-    }
+  components: {
+    FooterTabs,
+  },
 };
 </script>
 
