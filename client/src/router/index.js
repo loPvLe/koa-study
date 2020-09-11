@@ -28,6 +28,16 @@ const router = new VueRouter({
       ]
     },
     {
+      path: '/other',
+      component: () => import('@/pages/other'),
+      children: [
+        {
+          path: '/other/food',
+          component: () => import('@/pages/food/index')
+        },
+      ]
+    },
+    {
       path: '/admin',
       component: () => import('@/pages/admin/add')
     },
