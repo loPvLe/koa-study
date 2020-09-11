@@ -1,4 +1,4 @@
 /**
  * Export versions
  */
-module.exports.v1 = require('./api');
+module.exports.v1 = require('./v1');

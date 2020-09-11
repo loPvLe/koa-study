@@ -8,31 +8,34 @@ const mongoose = require('mongoose');
 const { logger } = require('./middleware/logger');
 // const { responseTime, errors } = require('./middleware');
 const { v1 } = require('./services');
+const dotenv = require('dotenv');
 
 const app = new Koa();
+dotenv.config('./env');
 
-// mongoose.connect(process.env.SPACEX_MONGO, {
-//   useFindAndModify: false,
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-// });
 
-// const db = mongoose.connection;
+mongoose.connect(process.env.DB, {
+  useFindAndModify: false,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
-// db.on('error', (err) => {
-//   logger.error(err);
-// });
-// db.once('connected', () => {
-//   logger.info('Mongo connected');
-//   app.emit('ready');
-// });
-// db.on('reconnected', () => {
-//   logger.info('Mongo re-connected');
-// });
-// db.on('disconnected', () => {
-//   logger.info('Mongo disconnected');
-// });
+const db = mongoose.connection;
+
+db.on('error', (err) => {
+  logger.error(err);
+});
+db.once('connected', () => {
+  logger.info('Mongo connected');
+  app.emit('ready');
+});
+db.on('reconnected', () => {
+  logger.info('Mongo re-connected');
+});
+db.on('disconnected', () => {
+  logger.info('Mongo disconnected');
+});
 
 // disable console.errors for pino
 app.silent = true;
